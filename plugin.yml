@@ -1,0 +1,13 @@
+name: LuckyWars
+main: PrinxIsLeqit\LuckyWars\LuckyWars
+author: PrinxIsLeqit
+version: 3.4.0
+api: [3.0.0-ALPHA12]
+
+commands:
+    lw:
+        usage: /lw <leave-make>
+        description: LuckyWars-Commands
+    lwstart:
+        usage: /lwstart
+        description: LuckyWars-Force start
