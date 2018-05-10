@@ -59,7 +59,7 @@ class LuckyWars extends PluginBase implements Listener {
 		$this->getServer()->getScheduler()->scheduleRepeatingTask(new RefreshSigns($this), 20);
 	}
 	
-	public function onMove(PlayerMoveEvent $event)
+	public function onMove(PlayerMoveEvent $event) 
 	{
 		$player = $event->getPlayer();
 		$level = $player->getLevel()->getFolderName();
