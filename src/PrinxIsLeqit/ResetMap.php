@@ -26,3 +26,4 @@ Class ResetMap
             return true;
     }
 }
+
