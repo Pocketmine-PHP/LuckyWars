@@ -1,6 +1,12 @@
 <?php
-
-namespace PrinxIsLeqit\LuckyWars;
+// Copyright Disclaimer EULA:
+/*Importante. Lea detenidamente.
+Pocketmine-PHP™ Software (“LuckyWars”)
+Contrato de Licencia de Software de Usuario Final (“EULA”):
+Según los distintos componentes de software de código abierto autorizados y según los términos de acuerdos aplicables de licencia de código abierto, el Software de código abierto está compuesto por componentes de software individuales, cada uno de los cuales cuenta con su propio derecho de autor y sus propias condiciones de licencia aplicable. Este Software es de código abierto, que incluye contenido creado por georgianYT que no se puede modificar (Any redistribution of this can be penalized):
+ * Más información en: http://www.licenciasonline.com/
+ * */
+namespace prinxisleqit\LuckyWars;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\scheduler\PluginTask;
@@ -19,14 +25,14 @@ use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\event\player\PlayerQuitEvent;
-use PrinxIsLeqit\LuckyWars\ResetMap;
+use georgianYT\LuckyWars\ResetMap;
 use pocketmine\level\sound\PopSound;
 use pocketmine\block\Air;
 use pocketmine\math\Vector3;
 
 class LuckyWars extends PluginBase implements Listener {
 
-    public $prefix = TE::GRAY . "[" . TE::YELLOW . TE::BOLD . "Lucky" . TE::GREEN . "Wars" . TE::RESET . TE::GRAY . "]";
+    public $prefix = TE::GRAY . "[" . TE::YELLOW . TE::RESET . "§eLucky" . TE::GREEN . "§bWars" . TE::RESET . TE::GRAY . "]";
 	public $mode = 0;
 	public $arenas = array();
 	public $currentLevel = "";
@@ -34,7 +40,7 @@ class LuckyWars extends PluginBase implements Listener {
 	
 	public function onEnable()
 	{
-		  $this->getLogger()->info(TE::DARK_AQUA . "LuckyWars by PrinxIsLeqit& georgianYT");
+		  $this->getLogger()->info(TE::DARK_AQUA . "LuckyWars  By Pocketmine-PHP");
                   
                 $this->getServer()->getPluginManager()->registerEvents($this ,$this);
 		@mkdir($this->getDataFolder());
@@ -47,7 +53,7 @@ class LuckyWars extends PluginBase implements Listener {
 		{
 			$this->getServer()->loadLevel($lev);
 		}
-                $items = array(array(24,0,16),array(260,0,5),array(261,0,1),array(262,0,6),array(264,0,1),array(265,0,1),array(268,0,1),array(271,0,1),array(272,0,1),array(275,0,1),array(24,0,64),array(286,0,1),array(297,0,3),array(298,0,1),array(299,0,1),array(300,0,1),array(301,0,1),array(302,0,1),array(303,0,1),array(24,0,32),array(305,0,1),array(306,0,1),array(307,0,1),array(308,0,1),array(309,0,1),array(314,0,1),array(315,0,1),array(316,0,1),array(317,0,1),array(320,0,4),array(280,0,1),array(364,0,4),array(366,0,5),array(391,0,5));
+                $items = array(array(258,0,1),array(260,0,5),array(261,0,1),array(262,0,6),array(264,0,1),array(265,0,1),array(268,0,1),array(271,0,1),array(272,0,1),array(275,0,1),array(283,0,1),array(286,0,1),array(297,0,3),array(298,0,1),array(299,0,1),array(300,0,1),array(301,0,1),array(302,0,1),array(303,0,1),array(304,0,1),array(305,0,1),array(306,0,1),array(307,0,1),array(308,0,1),array(309,0,1),array(314,0,1),array(315,0,1),array(316,0,1),array(317,0,1),array(320,0,4),array(280,0,1),array(364,0,4),array(366,0,5),array(391,0,5));
 		if($config->get("luckyitems")==null)
 		{
 			$config->set("luckyitems",$items);
@@ -59,7 +65,7 @@ class LuckyWars extends PluginBase implements Listener {
 		$this->getServer()->getScheduler()->scheduleRepeatingTask(new RefreshSigns($this), 20);
 	}
 	
-	public function onMove(PlayerMoveEvent $event) 
+	public function onMove(PlayerMoveEvent $event)
 	{
 		$player = $event->getPlayer();
 		$level = $player->getLevel()->getFolderName();
@@ -146,14 +152,14 @@ class LuckyWars extends PluginBase implements Listener {
 		}
 	}
 	
-	public function onCommand(CommandSender $player, Command $cmd, $label, array $args): bool{
+	public function onCommand(CommandSender $player, Command $cmd, string $label, array $args):bool {
         switch($cmd->getName()){
 			case "lw":
 				if($player->isOp())
 				{
 					if(!empty($args[0]))
 					{
-						if($args[0]=="make")
+						if($args[0]=="create")
 						{
 							if(!empty($args[1]))
 							{
@@ -164,7 +170,7 @@ class LuckyWars extends PluginBase implements Listener {
 									array_push($this->arenas,$args[1]);
 									$this->currentLevel = $args[1];
 									$this->mode = 1;
-									$player->sendMessage($this->prefix . "Touque on the islands to mark the Spawn!");
+									$player->sendMessage($this->prefix . "Toca los puntos del spawneo!");
 									$player->setGamemode(1);
                                                                         array_push($this->op, $player->getName());
 									$player->teleport($this->getServer()->getLevelByName($args[1])->getSafeSpawn(),0,0);
@@ -173,24 +179,24 @@ class LuckyWars extends PluginBase implements Listener {
 								}
 								else
 								{
-									$player->sendMessage($this->prefix . "Error Loading the Map");
+									$player->sendMessage($this->prefix . "ERROR missing world.");
 								}
 							}
 							else
 							{
-								$player->sendMessage($this->prefix . "Error missing parameters.");
+								$player->sendMessage($this->prefix . "ERROR missing parameters.");
 							}
 						}
 						else
 						{
-							$player->sendMessage($this->prefix . "Invalid command");
+							$player->sendMessage($this->prefix . "Comando invalido.");
 						}
 					}
 					else
 					{
-					 $player->sendMessage($this->prefix . "LuckyWars Commands!");
-                                         $player->sendMessage($this->prefix . "/lw make [world] Make LuckyWars Arena!");
-                                         $player->sendMessage($this->prefix . "/lwstart Start The Arena");
+					 $player->sendMessage($this->prefix . "Comandos LuckyWars FontyPE");
+                                         $player->sendMessage($this->prefix . "/lw create [mundo]: Crear arena LuckyWars!");
+                                         $player->sendMessage($this->prefix . "/lwstart: iniciar juego");
 					}
 				}
 			return true;
@@ -205,7 +211,7 @@ class LuckyWars extends PluginBase implements Listener {
                                         {
                                         $config->set($args[0] . "StartTime", 10);
                                         $config->save();
-                                        $player->sendMessage($this->prefix . "§aStart in 10...");
+                                        $player->sendMessage($this->prefix . "§eEmpezando en 10...");
                                         }
                                         }
                                         else
@@ -216,7 +222,7 @@ class LuckyWars extends PluginBase implements Listener {
                                             {
                                             $config->set($level . "StartTime", 10);
                                             $config->save();
-                                            $player->sendMessage($this->prefix . "§aStart in 10...");
+                                            $player->sendMessage($this->prefix . "§eEmpezando en 10...");
                                             }
                                         }
                                 }
@@ -234,11 +240,11 @@ class LuckyWars extends PluginBase implements Listener {
 		{
 			if(($this->mode==26)&&(in_array($player->getName(), $this->op)))
 			{
-				$tile->setText(TE::AQUA . "[Join]",TE::YELLOW  . "0 / 12","§f" . $this->currentLevel,$this->prefix);
+				$tile->setText(TE::AQUA . "[Unirse]",TE::YELLOW  . "0 / 12","§f" . $this->currentLevel,$this->prefix);
 				$this->refreshArenas();
 				$this->currentLevel = "";
 				$this->mode = 0;
-				$player->sendMessage($this->prefix . "Arena Created!");
+				$player->sendMessage($this->prefix . "Arena Registrada");
                                 array_shift($this->op);
 			}
 			else
@@ -246,11 +252,11 @@ class LuckyWars extends PluginBase implements Listener {
 				$text = $tile->getText();
 				if($text[3] == $this->prefix)
 				{
-					if($text[0]==TE::AQUA . "[Join]")
+					if($text[0]==TE::AQUA . "[Unirse]")
 					{
 						$config = new Config($this->getDataFolder() . "/config.yml", Config::YAML);
                                                 $slots = new Config($this->getDataFolder() . "/slots.yml", Config::YAML);
-                                                $namemap = str_replace("Â§f", "", $text[2]);
+                                                $namemap = str_replace("§f", "", $text[2]);
 						$level = $this->getServer()->getLevelByName($namemap);
                                                 for ($i = 1; $i <= 12; $i++) {
                                                     if($slots->get("slot".$i.$namemap)==null)
@@ -260,14 +266,14 @@ class LuckyWars extends PluginBase implements Listener {
                                                             goto with;
                                                     }
                                                 }
-                                                $player->sendMessage($this->prefix."Slot full");
+                                                $player->sendMessage($this->prefix."No hay Slots");
                                                 goto sinslots;
                                                 with:
                                                 $slots->save();
-                                                $player->sendMessage($this->prefix . "entered the game");
+                                                $player->sendMessage($this->prefix . "§eHas entrado al juego");
                                                 foreach($level->getPlayers() as $playersinarena)
                                                 {
-                                                $playersinarena->sendMessage($player->getNameTag() ." joined the game");
+                                                $playersinarena->sendMessage($player->getNameTag() ." §eHa entrado a la partida");
                                                 }
 						$spawn = new Position($thespawn[0]+0.5,$thespawn[1],$thespawn[2]+0.5,$level);
 						$level->loadChunk($spawn->getFloorX(), $spawn->getFloorZ());
@@ -282,7 +288,7 @@ class LuckyWars extends PluginBase implements Listener {
 					}
 					else
 					{
-						$player->sendMessage($this->prefix . "you can't join");
+						$player->sendMessage($this->prefix . "No puedes entrar");
 					}
 				}
 			}
@@ -302,7 +308,7 @@ class LuckyWars extends PluginBase implements Listener {
 			$player->sendMessage($this->prefix . "Spawn " . $this->mode . " has been registered!");
 			$config->set("arenas",$this->arenas);
                         $config->set($this->currentLevel . "inicio", 0);
-			$player->sendMessage($this->prefix . "Touch Sign to register Arena!");
+			$player->sendMessage($this->prefix . "Toca un cartel para registrar la Arena!");
 			$spawn = $this->getServer()->getDefaultLevel()->getSafeSpawn();
 			$this->getServer()->getDefaultLevel()->loadChunk($spawn->getFloorX(), $spawn->getFloorZ());
 			$player->teleport($spawn,0,0);
@@ -370,15 +376,15 @@ class RefreshSigns extends PluginTask {
                                         {
                                             $aop=$aop+1;
                                         }
-					$ingame = TE::AQUA . "[Join]";
+					$ingame = TE::AQUA . "[Unirse]";
 					$config = new Config($this->plugin->getDataFolder() . "/config.yml", Config::YAML);
 					if($config->get($namemap . "PlayTime")!=780)
 					{
-						$ingame = TE::DARK_PURPLE . "[InGame]";
+						$ingame = TE::DARK_PURPLE . "[En juego]";
 					}
 					elseif($aop>=12)
 					{
-						$ingame = TE::GOLD . "[Full]";
+						$ingame = TE::GOLD . "[Lleno]";
 					}
 					$t->setText($ingame,TE::YELLOW  . $aop . " / 12",$text[2],$this->prefix);
 				}
@@ -434,7 +440,7 @@ class GameSender extends PluginTask {
 								$timeToStart--;
 								foreach($playersArena as $pl)
 								{
-									$pl->sendPopup(TE::YELLOW."Starting in ".TE::GREEN . $timeToStart.TE::RESET);
+									$pl->sendPopup(TE::GREEN."Comenzando en ".TE::GREEN . $timeToStart.TE::RESET);
                                                                         if($timeToStart<=5)
                                                                         {
                                                                         $levelArena->addSound(new PopSound($pl));
@@ -461,7 +467,7 @@ class GameSender extends PluginTask {
 								{
 									foreach($playersArena as $pl)
 									{
-                                                                            $this->plugin->getServer()->broadcastMessage($this->prefix.$pl->getName().TE::GREEN." Winner in arena ".TE::AQUA.$arena);
+                                                                            $this->plugin->getServer()->broadcastMessage($this->prefix.$pl->getName().TE::GREEN." Gano en la arena ".TE::AQUA.$arena);
                                                                             $pl->getInventory()->clearAll();
                                                                             $pl->removeAllEffects();
                                                                             $pl->teleport($this->plugin->getServer()->getDefaultLevel()->getSafeSpawn(),0,0);
@@ -478,7 +484,7 @@ class GameSender extends PluginTask {
                                                                 {
                                                                     foreach($playersArena as $pl)
                                                                         {
-                                                                        $pl->sendPopup(TE::BOLD.TE::GOLD.$aop." ".TE::AQUA."Players remaining".TE::RESET);
+                                                                        $pl->sendPopup(TE::BOLD.TE::GOLD.$aop." ".TE::AQUA."Jugadores restantes".TE::RESET);
                                                                         }
                                                                 }
 								$time--;
@@ -492,8 +498,8 @@ class GameSender extends PluginTask {
 									foreach($playersArena as $pl)
 									{
 										$pl->sendMessage(TE::YELLOW.">--------------------------------");
-                                                                                $pl->sendMessage(TE::YELLOW.">".TE::RED."Game: ".TE::GREEN."The Game Has Been Started");
-                                                                                $pl->sendMessage(TE::YELLOW.">".TE::WHITE."used map " .TE::AQUA. $arena);
+                                                                                $pl->sendMessage(TE::YELLOW.">".TE::RED."Atención: ".TE::GREEN."El Juego ha iniciado");
+                                                                                $pl->sendMessage(TE::YELLOW.">".TE::WHITE."Map: " .TE::AQUA. $arena);
                                                                                 $pl->sendMessage(TE::YELLOW.">--------------------------------");
 									}
 								}
@@ -501,8 +507,8 @@ class GameSender extends PluginTask {
 								{
 									foreach($playersArena as $pl)
 									{
-                                                                                $pl->sendMessage(TE::YELLOW.">".TE::AQUA." ");
-                                                                                $pl->sendMessage(TE::YELLOW.">".TE::AQUA." ".TE::GREEN." ");
+                                                                                $pl->sendMessage(TE::YELLOW.">".TE::AQUA."Estas jugando en FontyPE");
+                                                                                $pl->sendMessage(TE::YELLOW.">".TE::AQUA."Gracias".TE::GREEN." por jugar");
 									}
 								}
 								if($time<300)
@@ -512,19 +518,19 @@ class GameSender extends PluginTask {
 									{
 										foreach($playersArena as $pl)
 										{
-											$pl->sendMessage($this->prefix .TE::YELLOW. $minutes . " " .TE::GREEN. "minutes remaining");
+											$pl->sendMessage($this->prefix .TE::YELLOW. $minutes . " " .TE::GREEN. "minutos restantes");
 										}
 									}
 									else if($time == 30 || $time == 15 || $time == 10 || $time ==5 || $time ==4 || $time ==3 || $time ==2 || $time ==1)
 									{
 										foreach($playersArena as $pl)
 										{
-											$pl->sendMessage($this->prefix .TE::YELLOW. $time . " " .TE::GREEN. "second remaining");
+											$pl->sendMessage($this->prefix .TE::YELLOW. $time . " " .TE::GREEN. "segundos restantes");
 										}
 									}
 									if($time <= 0)
 									{
-                                                                            $this->plugin->getServer()->broadcastMessage($this->prefix .TE::GREEN."Winner in arena ".TE::AQUA.$arena);
+                                                                            $this->plugin->getServer()->broadcastMessage($this->prefix .TE::GREEN."No hay ganadores en la arena ".TE::AQUA.$arena);
 										foreach($playersArena as $pl)
 										{
 											$pl->teleport($this->plugin->getServer()->getDefaultLevel()->getSafeSpawn(),0,0);
@@ -547,7 +553,7 @@ class GameSender extends PluginTask {
 						{
                                                     foreach($playersArena as $pl)
                                                     {
-                                                            $pl->sendPopup(TE::DARK_AQUA . "Need More Players" .TE::RESET);
+                                                            $pl->sendPopup(TE::DARK_AQUA . "Faltan Jugadores" .TE::RESET);
                                                     }
                                                     $config->set($arena . "PlayTime", 780);
                                                     $config->set($arena . "StartTime", 30);
