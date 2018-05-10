@@ -34,7 +34,7 @@ class LuckyWars extends PluginBase implements Listener {
 	
 	public function onEnable()
 	{
-		  $this->getLogger()->info(TE::DARK_AQUA . "LuckyWars by PrinxIsLeqit");
+		  $this->getLogger()->info(TE::DARK_AQUA . "LuckyWars by PrinxIsLeqit& georgianYT");
                   
                 $this->getServer()->getPluginManager()->registerEvents($this ,$this);
 		@mkdir($this->getDataFolder());
