@@ -1,8 +1,8 @@
 <?php
 
-namespace KaitoDoDo\LuckyWars;
+namespace PrinxIsLeqit\LuckyWars;
 
-use KaitoDoDo\LuckyWars\GameSender;
+use PrinxIsLeqit\LuckyWars\GameSender;
 
 Class ResetMap
 {
