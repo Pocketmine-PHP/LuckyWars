@@ -1,8 +1,8 @@
 <?php
 
-namespace PrinxIsLeqit\LuckyWars;
+namespace prinxisleqit\LuckyWars;
 
-use PrinxIsLeqit\LuckyWars\GameSender;
+use georgianYT\LuckyWars\GameSender;
 
 Class ResetMap
 {
@@ -26,4 +26,3 @@ Class ResetMap
             return true;
     }
 }
-
