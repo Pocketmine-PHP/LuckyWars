@@ -4,7 +4,7 @@ namespace prinxisleqit\LuckyWars;
 
 use georgianYT\LuckyWars\GameSender;
 
-Class ResetMap
+class ResetMap implements Task
 {
     public function __construct(GameSender $plugin){
         $this->plugin = $plugin;
